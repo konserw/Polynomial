@@ -29,8 +29,4 @@ public:
     wielomian horner(long double c);
 };
 
-
-//extern wielomian foo;
-long double foo(long double x);
 #endif // WIELOMIAN_H_INCLUDED
-

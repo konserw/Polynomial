@@ -4,14 +4,13 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
-//using std::cout;
 
 wielomian::wielomian(){
 }
 wielomian::wielomian(long double x0){
     vec.push_back(x0);
 }
-wielomian::wielomian(long double x1, long double x0){//incjalizacja jako dwumian x1+xo
+wielomian::wielomian(long double x1, long double x0){
     vec.push_back(x0);
     vec.push_back(x1);
 }
@@ -46,8 +45,6 @@ std::istream & operator>> (std::istream &wejscie, wielomian& wielo){
     return wejscie;
 }
 wielomian& operator<< (wielomian& wielo, long double x){
-//    long double x;
-  //  wejscie >> x;
     wielo.vec.push_back(x);
     return wielo;
 }
@@ -74,18 +71,11 @@ wielomian operator* (const wielomian& w1, const wielomian& w2){
     wielomian temp;
     temp.resize(m+n);
 
-//    std::ofstream cout("log");
-//    cout << m << "\t" << n << "\n";
- //   cout << "stopien tempa: " << temp.vec.size() << "\ntemp:\t" << temp << "\n";
     for (int i = 0; i <= m; i++) {
-   //     cout << "i: " << i << "\n";
         for (int j = 0; j <= n; j++) {
-     //       cout << "\tj: " << j << "\tw1[i]: " << w1[i] << "\tw2[j]: " << w2[j];
             temp.vec[i + j] += w1[i] * w2[j];
-       //     cout << "\ttemp[i+j]: " << temp.vec[i + j] << "\n";
         }
     }
-  //  cout << "temp:\t" << temp <<"\n";
     return temp;
 }
 
