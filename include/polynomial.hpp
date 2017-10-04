@@ -5,38 +5,47 @@
 
 class polynomial{
 private:
-    std::vector<long double> vec;
+    std::vector<long double> coefficients;
 
 public:
-    polynomial();
+    //constructors
+    polynomial() = default;
     polynomial(long double x0);
     polynomial(long double x1, long double x0);
+    ~polynomial() = default;
 
+    //other
     void resize(int n);
     bool isEmpty() const;
     int degree() const;
     polynomial derivative() const;
     polynomial horner(long double c);
-
-    std::string print(char sep = ' ', int precision = 7);
-    std::string printVertical(int precision = 7);
-    std::string printHorizontal(int precision = 7);
-
-    long double at(size_t k) const;
-    void operator-();
-    const long double& operator[](int el) const;
-    long double& operator[](int el);
     long double operator()(long double x) const;
 
-    friend std::ostream & operator<<(std::ostream &wyjscie, const polynomial& wielo);
+    //accessors and mutators
+    long double at(size_t k) const;
+    const long double& operator[](size_t k) const;
+    long double& operator[](size_t k);
     friend polynomial& operator<<(polynomial& wielo, long double x);
-    friend std::istream & operator>>(std::istream &wejscie, polynomial& wielo);
+    friend std::istream & operator>>(std::istream &input, polynomial& wielo);
+
+    //printing
+    std::string print() const;
+    std::string printVector(char sep = ' ', int precision = 7) const;
+    std::string printVerticalVector(int precision = 7) const;
+    std::string printHorizontalVector(int precision = 7) const;
+    friend std::ostream & operator<<(std::ostream &putput, const polynomial& w);
+
+    //arithmetic
+    void operator-();
     friend polynomial operator+(const polynomial& w1, const polynomial& w2);
     friend polynomial operator-(const polynomial& w1, const polynomial& w2);
     friend polynomial operator*(const polynomial& w1, const polynomial& w2);
   //  friend polynomial operator/(const wielomian& w1, const wielomian& w2);
 };
 
+std::ostream & operator<<(std::ostream &output, const polynomial& w);
+std::istream & operator>>(std::istream &input, polynomial& w);
 polynomial operator+(const polynomial& w1, const polynomial& w2);
 polynomial operator-(const polynomial& w1, const polynomial& w2);
 polynomial operator*(const polynomial& w1, const polynomial& w2);
