@@ -1,4 +1,7 @@
 build/
+*.user
+*.swp
+
 # Prerequisites
 *.d
 
