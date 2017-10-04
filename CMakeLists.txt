@@ -13,6 +13,10 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 # Generic Compiler Flags
 #
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 #if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_INIT} -Wall -Wextra -Werror ${CMAKE_CXX_FLAGS}")
 #    # TODO: A better fix should handle ld's --as-needed flag
