@@ -5,29 +5,35 @@
 #include <vector>
 #include <iomanip>
 
-wielomian::wielomian(){
+polynomial::polynomial() {
 }
-wielomian::wielomian(long double x0){
+
+polynomial::polynomial(long double x0) {
     vec.push_back(x0);
 }
-wielomian::wielomian(long double x1, long double x0){
+
+polynomial::polynomial(long double x1, long double x0) {
     vec.push_back(x0);
     vec.push_back(x1);
 }
-void wielomian::resize(int n){
+
+void polynomial::resize(int n) {
     for(int i=0; i<=n; i++)
         vec.push_back(0);
 }
-int wielomian::stopien()const{
+
+int polynomial::degree() const {
     return vec.size()-1;
 }
-void wielomian::operator- (){
+
+void polynomial::operator-() {
     for(int i=0; i<vec.size(); i++){
         vec[i] = -vec[i];
     }
 }
-std::ostream & operator<< (std::ostream &wyjscie, const wielomian& wielo){
-    for(int i=wielo.stopien(); i>=0; i--){
+
+std::ostream & operator<<(std::ostream &wyjscie, const polynomial& wielo) {
+    for(int i=wielo.degree(); i>=0; i--){
         if(wielo[i]){
             wyjscie << wielo[i];
             if(i){
@@ -38,37 +44,42 @@ std::ostream & operator<< (std::ostream &wyjscie, const wielomian& wielo){
     }
     return wyjscie;
 }
-std::istream & operator>> (std::istream &wejscie, wielomian& wielo){
+
+std::istream & operator>>(std::istream &wejscie, polynomial& wielo) {
     long double x;
     wejscie >> x;
     wielo.vec.push_back(x);
     return wejscie;
 }
-wielomian& operator<< (wielomian& wielo, long double x){
+
+polynomial& operator<<(polynomial& wielo, long double x) {
     wielo.vec.push_back(x);
     return wielo;
 }
-wielomian operator+ (const wielomian& w1, const wielomian& w2){
+
+polynomial operator+(const polynomial& w1, const polynomial& w2) {
     int n;
-    if(w1.stopien() > w2.stopien()) n=w1.stopien();
-    else n=w2.stopien();
-    wielomian temp;
+    if(w1.degree() > w2.degree()) n=w1.degree();
+    else n=w2.degree();
+    polynomial temp;
 
     for(int i=0; i<=n; i++){
         temp << w1[i]+w2[i];
     }
     return temp;
 }
-wielomian operator- (const wielomian& w1, const wielomian& w2){
-    wielomian temp;
+
+polynomial operator-(const polynomial& w1, const polynomial& w2) {
+    polynomial temp;
     temp = w2;
     -temp;
     return w1 + temp;
 }
-wielomian operator* (const wielomian& w1, const wielomian& w2){
-    int m = w1.stopien();
-    int n = w2.stopien();
-    wielomian temp;
+
+polynomial operator*(const polynomial& w1, const polynomial& w2) {
+    int m = w1.degree();
+    int n = w2.degree();
+    polynomial temp;
     temp.resize(m+n);
 
     for (int i = 0; i <= m; i++) {
@@ -79,33 +90,33 @@ wielomian operator* (const wielomian& w1, const wielomian& w2){
     return temp;
 }
 
-long double& wielomian::operator[](int el)
-{
+long double& polynomial::operator[](int el) {
     return vec[el];
 }
 
-long double wielomian::operator[](int el) const
-{
+long double polynomial::operator[](int el) const {
     if(vec.size() > el)
         return vec[el];
     else return 0;
 }
-long double wielomian::operator()(long double x)const{
+
+long double polynomial::operator()(long double x) const {
     long double r=0;
-    for(int i=0; i<vec.size(); i++){
+    for(int i=0; i<vec.size(); i++) {
         r += vec[i]*pow(x, i);
     }
     return r;
 }
-wielomian wielomian::der()const{
-    wielomian t;
-    for(int i=1; i<vec.size(); i++){
+
+polynomial polynomial::derivative() const {
+    polynomial t;
+    for(int i=1; i<vec.size(); i++) {
         t << vec[i]*i;
     }
     return t;
 }
-std::string wielomian::ods()
-{
+
+std::string polynomial::print() {
     std::stringstream ss;
     for(std::vector<long double>::iterator i=vec.begin(); i<vec.end(); ++i)
     {
@@ -114,15 +125,13 @@ std::string wielomian::ods()
     return ss.str();
 }
 
-wielomian wielomian::horner(long double c)
-{
-    wielomian w;
-    int n = this->stopien();
+polynomial polynomial::horner(long double c) {
+    polynomial w;
+    int n = this->degree();
     w.resize(n-1);
     w[n-1] = vec[n];
-    for(int i=n-1; i>0; i--)
-    {
-      w[i-1] = vec[i] + c*vec[i];
+    for(int i=n-1; i>0; i--) {
+        w[i-1] = vec[i] + c*vec[i];
     }
     return w;
 }

@@ -1,32 +1,37 @@
-#ifndef WIELOMIAN_H_INCLUDED
-#define WIELOMIAN_H_INCLUDED
+#ifndef POLYNOMIAL_HPP_INCLUDED
+#define POLYNOMIAL_HPP_INCLUDED
 #include <vector>
 #include <iostream>
 
-class wielomian{
+class polynomial{
 private:
     std::vector<long double> vec;
 
 public:
-    wielomian();
-    wielomian(long double x0);
-    wielomian(long double x1, long double x0);
+    polynomial();
+    polynomial(long double x0);
+    polynomial(long double x1, long double x0);
     void resize(int n);
-    int stopien()const;
-    void operator- ();
-    long double operator[](int el)const;
+    int degree() const;
+    void operator-();
+    long double operator[](int el) const;
     long double& operator[](int el);
-    long double operator()(long double x)const;
-    wielomian der()const;
-    std::string ods();
-    friend std::ostream & operator<< (std::ostream &wyjscie, const wielomian& wielo);
-    friend wielomian& operator<< (wielomian& wielo, long double x);
-    friend std::istream & operator>> (std::istream &wejscie, wielomian& wielo);
-    friend wielomian operator+ (const wielomian& w1, const wielomian& w2);
-    friend wielomian operator- (const wielomian& w1, const wielomian& w2);
-    friend wielomian operator* (const wielomian& w1, const wielomian& w2);
-  //  friend wielomian operator/ (const wielomian& w1, const wielomian& w2);
-    wielomian horner(long double c);
+    long double operator()(long double x) const;
+    polynomial derivative() const;
+    std::string print();
+    friend std::ostream & operator<<(std::ostream &wyjscie, const polynomial& wielo);
+    friend polynomial& operator<<(polynomial& wielo, long double x);
+    friend std::istream & operator>>(std::istream &wejscie, polynomial& wielo);
+    friend polynomial operator+(const polynomial& w1, const polynomial& w2);
+    friend polynomial operator-(const polynomial& w1, const polynomial& w2);
+    friend polynomial operator*(const polynomial& w1, const polynomial& w2);
+  //  friend polynomial operator/(const wielomian& w1, const wielomian& w2);
+    polynomial horner(long double c);
 };
 
-#endif // WIELOMIAN_H_INCLUDED
+polynomial operator+(const polynomial& w1, const polynomial& w2);
+polynomial operator-(const polynomial& w1, const polynomial& w2);
+polynomial operator*(const polynomial& w1, const polynomial& w2);
+//polynomial operator/(const wielomian& w1, const wielomian& w2);
+
+#endif // POLYNOMIAL_HPP_INCLUDED
