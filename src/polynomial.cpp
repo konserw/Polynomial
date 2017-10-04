@@ -1,4 +1,4 @@
-#include "wielomian.h"
+#include "polynomial.hpp"
 #include <fstream>
 #include <cmath>
 #include <sstream>
