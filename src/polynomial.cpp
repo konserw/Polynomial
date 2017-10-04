@@ -116,13 +116,22 @@ polynomial polynomial::derivative() const {
     return t;
 }
 
-std::string polynomial::print() {
+std::string polynomial::print(char sep, int precision) {
     std::stringstream ss;
-    for(std::vector<long double>::iterator i=vec.begin(); i<vec.end(); ++i)
-    {
-        ss << std::setprecision(7) << *i << "\n";
+    ss << "[" << sep;
+    for(std::vector<long double>::iterator i=vec.begin(); i<vec.end(); ++i) {
+        ss << std::setprecision(precision) << *i << sep;
     }
+    ss << "]" << sep;
     return ss.str();
+}
+
+std::string polynomial::printVertical(int precision) {
+    return print('\n', precision);
+}
+
+std::string polynomial::printHorizontal(int precision) {
+    return print(' ', precision);
 }
 
 polynomial polynomial::horner(long double c) {

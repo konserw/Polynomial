@@ -11,14 +11,21 @@ public:
     polynomial();
     polynomial(long double x0);
     polynomial(long double x1, long double x0);
+
     void resize(int n);
     int degree() const;
+    polynomial derivative() const;
+    polynomial horner(long double c);
+
+    std::string print(char sep = ' ', int precision = 7);
+    std::string printVertical(int precision = 7);
+    std::string printHorizontal(int precision = 7);
+
     void operator-();
     long double operator[](int el) const;
     long double& operator[](int el);
     long double operator()(long double x) const;
-    polynomial derivative() const;
-    std::string print();
+
     friend std::ostream & operator<<(std::ostream &wyjscie, const polynomial& wielo);
     friend polynomial& operator<<(polynomial& wielo, long double x);
     friend std::istream & operator>>(std::istream &wejscie, polynomial& wielo);
@@ -26,7 +33,6 @@ public:
     friend polynomial operator-(const polynomial& w1, const polynomial& w2);
     friend polynomial operator*(const polynomial& w1, const polynomial& w2);
   //  friend polynomial operator/(const wielomian& w1, const wielomian& w2);
-    polynomial horner(long double c);
 };
 
 polynomial operator+(const polynomial& w1, const polynomial& w2);
