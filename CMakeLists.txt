@@ -108,6 +108,7 @@ else()
     if(NOT GMOCK_ROOT)
         set(GMOCK_ROOT "${CMAKE_CURRENT_BINARY_DIR}/gmock")
     endif()
+    set(GTEST_USE_STATIC_LIBS ON)
     find_package(GMock REQUIRED)
     if(GMOCK_FOUND)
         set(GMOCK_LIBRARIES

@@ -22,6 +22,11 @@ void polynomial::resize(int n) {
         vec.push_back(0);
 }
 
+bool polynomial::isEmpty() const
+{
+    return vec.empty();
+}
+
 int polynomial::degree() const {
     return vec.size()-1;
 }
@@ -64,7 +69,7 @@ polynomial operator+(const polynomial& w1, const polynomial& w2) {
     polynomial temp;
 
     for(int i=0; i<=n; i++){
-        temp << w1[i]+w2[i];
+        temp << w1.at(i) + w2.at(i);
     }
     return temp;
 }
@@ -94,10 +99,8 @@ long double& polynomial::operator[](int el) {
     return vec[el];
 }
 
-long double polynomial::operator[](int el) const {
-    if(vec.size() > el)
-        return vec[el];
-    else return 0;
+const long double& polynomial::operator[](int el) const {
+    return vec[el];
 }
 
 long double polynomial::operator()(long double x) const {
@@ -132,6 +135,12 @@ std::string polynomial::printVertical(int precision) {
 
 std::string polynomial::printHorizontal(int precision) {
     return print(' ', precision);
+}
+
+long double polynomial::at(size_t k) const {
+    if(k < vec.size())
+        return vec[k];
+    else return 0;
 }
 
 polynomial polynomial::horner(long double c) {

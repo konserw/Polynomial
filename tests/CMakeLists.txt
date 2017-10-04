@@ -11,6 +11,6 @@ if(GMOCK_FOUND)
     endfunction()
 
     # TODO Compile tests with the least possible code, not with the entire library
-    #polynomial_add_test(Test)
+    polynomial_add_test(ConstructorTest)
 
 endif()

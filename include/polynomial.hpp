@@ -13,6 +13,7 @@ public:
     polynomial(long double x1, long double x0);
 
     void resize(int n);
+    bool isEmpty() const;
     int degree() const;
     polynomial derivative() const;
     polynomial horner(long double c);
@@ -21,8 +22,9 @@ public:
     std::string printVertical(int precision = 7);
     std::string printHorizontal(int precision = 7);
 
+    long double at(size_t k) const;
     void operator-();
-    long double operator[](int el) const;
+    const long double& operator[](int el) const;
     long double& operator[](int el);
     long double operator()(long double x) const;
 
