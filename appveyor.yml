@@ -1,0 +1,41 @@
+version: "{branch}-ci-{build}"
+image: Visual Studio 2017
+
+environment:
+  matrix:
+  - MINGW_ARCH: i686
+    MINGW_ROOT: C:\msys64\mingw32
+    CMAKE_GENERATOR: 'MSYS Makefiles'
+  - MINGW_ARCH: x86_64
+    MINGW_ROOT: C:\msys64\mingw64
+    CMAKE_GENERATOR: 'MSYS Makefiles'
+  - MSVC_ARCH: x86
+    CMAKE_GENERATOR: 'NMake Makefiles'
+  - MSVC_ARCH: x64
+    CMAKE_GENERATOR: 'NMake Makefiles'
+
+install:
+- git submodule init
+- git submodule update
+- if defined MINGW_ROOT set PATH=%MINGW_ROOT%\bin;C:\msys64\usr\bin\;%PATH%
+- if defined MSVC_ARCH call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\vcvarsall.bat" %MSVC_ARCH%
+
+build_script:
+- cmake -E make_directory build
+- cmake -E chdir build cmake -G "%CMAKE_GENERATOR%" -DCUKE_ENABLE_EXAMPLES=ON ..
+- cmake --build build
+
+test_script:
+- set CTEST_OUTPUT_ON_FAILURE=ON
+- cmake --build build --target test
+
+after_test:
+- for /r %%v in (TEST-*.xml) do curl -s -F "file=@%%v;filename=%%~nxv" https://ci.appveyor.com/api/testresults/junit/%APPVEYOR_JOB_ID%
+
+notifications:
+- provider: Email
+  to:
+  - '{{commitAuthorEmail}}'
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true

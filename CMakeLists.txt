@@ -6,6 +6,7 @@ option(DISABLE_UNIT_TESTS  "Disable unit tests" OFF)
 option(VALGRIND_TESTS      "Run tests within Valgrind" OFF)
 option(ENABLE_EXAMPLES     "Enable the examples" OFF)
 
+set(GMOCK_VER "1.8.0")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 #
