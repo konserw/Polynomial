@@ -25,7 +25,10 @@ bool polynomial::isEmpty() const
 }
 
 int polynomial::degree() const {
-    return coefficients.size()-1;
+    for(int i=coefficients.size()-1; i >= 0; --i)
+        if(coefficients[i] != 0)
+            return i;
+    return -1;
 }
 
 void polynomial::operator-() {
@@ -36,12 +39,22 @@ void polynomial::operator-() {
 
 std::ostream & operator<<(std::ostream &output, const polynomial& w) {
     for(int i=w.degree(); i>=0; i--){
-        if(w[i]){
+        if(i == w.degree()) {
             output << w[i];
-            if(i){
-                output << "x^" << i << " ";
-                if(w[i-1] > 0) output << "+";
+        } else {
+            if(w[i] == 0) {
+                continue;
+            } else if(w[i] > 0) {
+                output << " + ";
+            } else {
+                output << " - ";
             }
+            output << std::abs(w[i]);
+        }
+        if(i > 1){
+            output << "x^" << i;
+        } else if (i == 1) {
+            output << "x";
         }
     }
     return output;
@@ -98,18 +111,6 @@ long double& polynomial::operator[](size_t k) {
 
 std::string polynomial::print() const {
     std::stringstream temp;
-    /*
-    for (int i=w.degree(); i>=0; --i) {
-        if (w[i]) {
-            temp << w[i];
-            if (i) {
-                temp << "x^" << i << " ";
-                if (w[i-1] > 0) {
-                    temp << "+";
-                }
-            }
-        }
-    }*/
     temp << *this;
     return temp.str();
 }
@@ -137,10 +138,10 @@ polynomial polynomial::derivative() const {
 std::string polynomial::printVector(char sep, int precision) const {
     std::stringstream ss;
     ss << "[" << sep;
-    for(auto i=coefficients.cbegin(); i<coefficients.cend(); ++i) {
+    for(auto i=coefficients.crbegin(); i!=coefficients.crend(); ++i) {
         ss << std::setprecision(precision) << *i << sep;
     }
-    ss << "]" << sep;
+    ss << "]";
     return ss.str();
 }
 
