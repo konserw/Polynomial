@@ -14,5 +14,6 @@ if(GMOCK_FOUND)
     polynomial_add_test(ConstructorTest)
     polynomial_add_test(PrintTest)
     polynomial_add_test(ArithmeticTest)
+    polynomial_add_test(ComparisonTest)
 
 endif()

@@ -42,13 +42,10 @@ public:
     friend polynomial operator-(const polynomial& w1, const polynomial& w2);
     friend polynomial operator*(const polynomial& w1, const polynomial& w2);
   //  friend polynomial operator/(const wielomian& w1, const wielomian& w2);
-};
 
-std::ostream & operator<<(std::ostream &output, const polynomial& w);
-std::istream & operator>>(std::istream &input, polynomial& w);
-polynomial operator+(const polynomial& w1, const polynomial& w2);
-polynomial operator-(const polynomial& w1, const polynomial& w2);
-polynomial operator*(const polynomial& w1, const polynomial& w2);
-//polynomial operator/(const wielomian& w1, const wielomian& w2);
+    //comparison
+    friend bool operator==(polynomial const &a, polynomial const &b) { return a.coefficients == b.coefficients; }
+    friend bool operator!=(polynomial const &a, polynomial const &b) { return a.coefficients != b.coefficients; }
+};
 
 #endif // POLYNOMIAL_HPP_INCLUDED
