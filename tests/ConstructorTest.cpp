@@ -14,15 +14,14 @@ TEST(ConstructorTest, ConstantTerm) {
 }
 
 TEST(ConstructorTest, Binomial) {
-    polynomial w(1, 2);//w = x + 2
+    polynomial w {1, 2};//w = x + 2
     ASSERT_EQ(1, w.degree());
     ASSERT_EQ(2, w[0]);
     ASSERT_EQ(1, w[1]);
 }
 
 TEST(ConstructorTest, 3DegreePolinomial) {
-    polynomial w;
-    w << 1 << 2 << 3;//w = 3x^2 + 2x + 1
+    polynomial w = {3, 2, 1};//w = 3x^2 + 2x + 1
     ASSERT_EQ(2, w.degree());
     ASSERT_EQ(1, w[0]);
     ASSERT_EQ(2, w[1]);

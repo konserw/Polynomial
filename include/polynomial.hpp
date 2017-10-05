@@ -11,7 +11,7 @@ public:
     //constructors
     polynomial() = default;
     polynomial(long double x0);
-    polynomial(long double x1, long double x0);
+    polynomial(std::initializer_list<long double> list);
     ~polynomial() = default;
 
     //other

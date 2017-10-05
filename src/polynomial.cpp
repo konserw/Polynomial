@@ -4,14 +4,16 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
+#include <iterator>
 
 polynomial::polynomial(long double x0) {
     coefficients.push_back(x0);
 }
 
-polynomial::polynomial(long double x1, long double x0) {
-    coefficients.push_back(x0);
-    coefficients.push_back(x1);
+polynomial::polynomial(std::initializer_list<long double> list) {
+    auto end = std::rend(list);
+    for(auto i = std::rbegin(list); i != end; ++i)
+        coefficients.push_back(*i);
 }
 
 void polynomial::resize(int n) {
