@@ -42,8 +42,8 @@ TEST(PrintTest, HorizontalVectorPrint) {
 }
 
 TEST(PrintTest, PreciseHorizontalVectorPrint) {
-    polynomial w = {1.123456789, 0.123456789};
-    ASSERT_STREQ("[ 1.123457 0.1234568 ]", w.printHorizontalVector(7).c_str());
+    polynomial w = {1.123456789l, 0.123456789l};
+    ASSERT_STREQ("[ 1.1234568 0.12345679 ]", w.printHorizontalVector(8).c_str());
 }
 
 TEST(PrintTest, NegativeHorizontalVectorPrint) {
@@ -82,6 +82,6 @@ TEST(PrintTest, VerticalVectorPrintWith0inside) {
 }
 
 TEST(PrintTest, PreciseVerticalVectorPrint) {
-    polynomial w = {1.123456789, 0.123456789};
-    ASSERT_STREQ("[\n1.123457\n0.1234568\n]", w.printVerticalVector(7).c_str());
+    polynomial w = {1.123456789l, 0.123456789l};
+    ASSERT_STREQ("[\n1.1234568\n0.12345679\n]", w.printVerticalVector(8).c_str());
 }

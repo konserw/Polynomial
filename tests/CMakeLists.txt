@@ -12,8 +12,10 @@ if(GMOCK_FOUND)
 
     # TODO Compile tests with the least possible code, not with the entire library
     polynomial_add_test(ConstructorTest)
+    polynomial_add_test(FillTest)
     polynomial_add_test(PrintTest)
     polynomial_add_test(ArithmeticTest)
     polynomial_add_test(ComparisonTest)
+    polynomial_add_test(OtherTest)
 
 endif()
