@@ -30,7 +30,7 @@ int polynomial::degree() const {
     for(int i=coefficients.size()-1; i >= 0; --i)
         if(coefficients[i] != 0)
             return i;
-    return -1;
+    return 0;
 }
 
 void polynomial::operator-() {

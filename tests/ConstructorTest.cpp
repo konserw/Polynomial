@@ -4,6 +4,7 @@
 TEST(ConstructorTest, ByDefaultEmptyPolynomial) {
     polynomial w;
     ASSERT_TRUE(w.isEmpty());
+    ASSERT_EQ(0, w.degree());
     ASSERT_EQ(0, w.at(0));
 }
 
